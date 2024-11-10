@@ -1,11 +1,11 @@
-using EnergyInspectorJournal.Data;
-using EnergyInspectorJournal.DataLayer.Data;
-using EnergyInspectorJournal.Models;
+using InspectorJournal.Data;
+using InspectorJournal.DataLayer.Data;
+using InspectorJournal.Models;
 using FuelStation.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace EnergyInspectorJournal
+namespace InspectorJournal
 {
     public class Program
     {

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace EnergyInspectorJournal.Data.Migrations
+namespace InspectorJournal.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

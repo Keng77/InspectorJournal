@@ -1,1 +1,1 @@
-# EnergyInspectorJournal
+# InspectorJournal

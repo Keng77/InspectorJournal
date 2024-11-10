@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EnergyInspectorJournal.DataLayer\EnergyInspectorJournal.DataLayer.csproj" />
+    <ProjectReference Include="..\EnergyInspectorJournal.DataLayer\InspectorJournal.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>

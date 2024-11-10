@@ -1,6 +1,6 @@
 ﻿
-using EnergyInspectorJournal.Data;
-using EnergyInspectorJournal.DataLayer.Data;
+using InspectorJournal.Data;
+using InspectorJournal.DataLayer.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;

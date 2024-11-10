@@ -1,4 +1,4 @@
-namespace EnergyInspectorJournal.Models
+namespace InspectorJournal.Models
 {
     public class ErrorViewModel
     {

@@ -1,8 +1,8 @@
-using EnergyInspectorJournal.Models;
+using InspectorJournal.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace EnergyInspectorJournal.Controllers
+namespace InspectorJournal.Controllers
 {
     public class HomeController : Controller
     {

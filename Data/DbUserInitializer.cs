@@ -1,7 +1,6 @@
-﻿using EnergyInspectorJournal.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace EnergyInspectorJournal.Data
+namespace InspectorJournal.Data
 {
     //Инициализация базы данных первой учетной записью и двумя ролями admin и user
     public static class DbUserInitializer

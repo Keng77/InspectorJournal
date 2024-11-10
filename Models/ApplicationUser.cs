@@ -11,6 +11,5 @@ namespace InspectorJournal.Models
         [DataType(DataType.Date)]
         public DateTime RegistrationDate { get; set; }
 
-
     }
 }

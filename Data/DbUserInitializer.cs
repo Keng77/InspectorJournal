@@ -1,39 +1,43 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using InspectorJournal.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace InspectorJournal.Data
+public static class DbUserInitializer
 {
-    //Инициализация базы данных первой учетной записью и двумя ролями admin и user
-    public static class DbUserInitializer
+    public static async Task Initialize(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        public static async Task Initialize(HttpContext context)
-        {
-            UserManager<ApplicationUser> userManager = context.RequestServices.GetRequiredService<UserManager<ApplicationUser>>();
-            RoleManager<IdentityRole> roleManager = context.RequestServices.GetRequiredService<RoleManager<IdentityRole>>();
-            string adminEmail = "admin@gmail.com";
-            string adminName = "admin@gmail.com";
+        // Проверяем наличие ролей
+        string adminRole = "Admin";
+        string userRole = "User";
 
-            string password = "_Aa123456";
-            if (await roleManager.FindByNameAsync("admin") == null)
+        var roleExist = await roleManager.RoleExistsAsync(adminRole);
+        if (!roleExist)
+        {
+            // Создаем роли, если они не существуют
+            await roleManager.CreateAsync(new IdentityRole(adminRole));
+        }
+
+        roleExist = await roleManager.RoleExistsAsync(userRole);
+        if (!roleExist)
+        {
+            await roleManager.CreateAsync(new IdentityRole(userRole));
+        }
+
+        // Проверяем, есть ли администратор
+        ApplicationUser user = await userManager.FindByEmailAsync("admin@example.com");
+        if (user == null)
+        {
+            user = new ApplicationUser
             {
-                await roleManager.CreateAsync(new IdentityRole("admin"));
-            }
-            if (await roleManager.FindByNameAsync("user") == null)
+                UserName = "admin@example.com",
+                Email = "admin@example.com",
+                RegistrationDate = DateTime.UtcNow
+            };
+
+            var result = await userManager.CreateAsync(user, "Password123!");
+            if (result.Succeeded)
             {
-                await roleManager.CreateAsync(new IdentityRole("user"));
-            }
-            if (await userManager.FindByNameAsync(adminEmail) == null)
-            {
-                ApplicationUser admin = new()
-                {
-                    Email = adminEmail,
-                    UserName = adminName,
-                    RegistrationDate = DateTime.Now
-                };
-                IdentityResult result = await userManager.CreateAsync(admin, password);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(admin, "admin");
-                }
+                // Добавляем админа в роль Admin
+                await userManager.AddToRoleAsync(user, adminRole);
             }
         }
     }

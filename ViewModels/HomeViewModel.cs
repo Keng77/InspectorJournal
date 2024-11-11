@@ -2,7 +2,7 @@
 using InspectorJournal.ViewModels;
 using System.Collections.Generic;
 
-namespace FuelStation.ViewModels
+namespace InspectorJournal.ViewModels
 {
     public class HomeViewModel
     {

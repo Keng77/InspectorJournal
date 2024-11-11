@@ -2,13 +2,10 @@
 
 @{
     ViewData["Title"] = "Список проверок";
-
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var user = Context.User;
     string EnterpriseName = Model.FilterInspectionViewModel?.Enterprise ?? "";
-
     string ViolationType = Model.FilterInspectionViewModel?.ViolationType ?? "";
-
     decimal? PenaltyAmount = Model.FilterInspectionViewModel?.PenaltyAmount;
 }
 
@@ -19,12 +16,11 @@
 </p>
 
 @using (Html.BeginForm("Index", "Inspections", FormMethod.Get))
-
 {
     <fieldset>
         Предприятие: @Html.TextBox("Enterprise", EnterpriseName)
         Тип нарушения: @Html.TextBox("ViolationType", ViolationType)
-        Задолженность > @Html.TextBox("PenaltyAmount", PenaltyAmount.HasValue ? PenaltyAmount.ToString() : "")
+        Задолженность > @Html.TextBox("PenaltyAmount", PenaltyAmount)
         <input type="submit" value="Найти" />
     </fieldset>
 }
@@ -36,7 +32,7 @@
                 <a asp-action="Index" asp-route-sortOrder="@Model.SortViewModel.EnterpriseNameSort"
                    asp-route-EnterpriseName="@EnterpriseName"
                    asp-route-ViolationType="@ViolationType"
-                   asp-route-PenaltyAmount="@(PenaltyAmount.HasValue ? PenaltyAmount.ToString() : "")">
+                   asp-route-PenaltyAmount="@PenaltyAmount">
                     Предприятие
                 </a>
             </th>
@@ -46,7 +42,7 @@
                 <a asp-action="Index" asp-route-sortOrder="@Model.SortViewModel.ViolationTypeSort"
                    asp-route-EnterpriseName="@EnterpriseName"
                    asp-route-ViolationType="@ViolationType"
-                   asp-route-PenaltyAmount="@(PenaltyAmount.HasValue ? PenaltyAmount.ToString() : "")">
+                   asp-route-PenaltyAmount="@PenaltyAmount">
                     Тип нарушения
                 </a>
             </th>
@@ -55,7 +51,7 @@
                 <a asp-action="Index" asp-route-sortOrder="@Model.SortViewModel.PenaltyAmountSort"
                    asp-route-EnterpriseName="@EnterpriseName"
                    asp-route-ViolationType="@ViolationType"
-                   asp-route-PenaltyAmount="@(PenaltyAmount.HasValue ? PenaltyAmount.ToString() : "")">
+                   asp-route-PenaltyAmount="@PenaltyAmount">
                     Задолженность
                 </a>
             </th>
@@ -63,11 +59,15 @@
             <th>Дедлайн Исправления</th>
             <th>Статус Оплаты</th>
             <th>Статус Исправления</th>
+            @if (user.IsInRole("Admin"))
+            {
+                <th>Действие</th>
+            }
+            
         </tr>
     </thead>
     <tbody>
         @foreach (var inspection in Model.Inspections)
-
         {
             <tr>
                 <td>@inspection.Enterprise.Name</td>
@@ -80,10 +80,15 @@
                 <td>@inspection.CorrectionDeadline.ToShortDateString()</td>
                 <td>@inspection.PaymentStatus</td>
                 <td>@inspection.CorrectionStatus</td>
+                <td>
+                    @Html.Partial("AdminActions", inspection.InspectionId)
+                </td>
+
             </tr>
         }
     </tbody>
 </table>
+
 <page-link page-model="Model.PageViewModel" page-action="Index"
            page-url-EnterpriseName="@EnterpriseName"
            page-url-ViolationType="@ViolationType"

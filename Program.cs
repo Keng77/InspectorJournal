@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using InspectorJournal.DataLayer.Models;
 using InspectorJournal.ViewModels;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class Program
 {
@@ -32,6 +33,7 @@ public class Program
         // Другие сервисы \\
 
         services.AddDistributedMemoryCache();
+        services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         services.AddSession(options =>
         {
             options.Cookie.Name = ".Journal.Session";

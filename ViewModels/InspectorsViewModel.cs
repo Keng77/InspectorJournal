@@ -3,7 +3,7 @@ using InspectorJournal.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace InspectorJourna.ViewModels
+namespace InspectorJournal.ViewModels
 {
     public class InspectorsViewModel
     {
@@ -19,8 +19,6 @@ namespace InspectorJourna.ViewModels
 
         [Display(Name = "Департамент")]
         public string Department { get; set; } = null!;
-
-
 
         //Свойство для навигации по страницам
         public PageViewModel PageViewModel { get; set; }

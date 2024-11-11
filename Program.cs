@@ -4,6 +4,8 @@ using InspectorJournal.Models;
 using InspectorJournal.DataLayer.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using InspectorJournal.DataLayer.Models;
+using InspectorJournal.ViewModels;
 
 public class Program
 {
@@ -27,7 +29,8 @@ public class Program
                 .AddDefaultUI()
                 .AddDefaultTokenProviders();
 
-        // Другие сервисы
+        // Другие сервисы \\
+
         services.AddDistributedMemoryCache();
         services.AddSession(options =>
         {
@@ -35,7 +38,7 @@ public class Program
             options.IdleTimeout = TimeSpan.FromSeconds(3600);
             options.Cookie.IsEssential = true;
         });
-
+        services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddRazorPages();
 

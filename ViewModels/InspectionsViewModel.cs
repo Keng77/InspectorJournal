@@ -1,14 +1,16 @@
 using InspectorJournal.DataLayer.Models;
 using InspectorJournal.ViewModels;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace FuelStation.ViewModels
+namespace InspectorJournal.ViewModels
 {
-    public class OperationsViewModel
+    public class InspectionsViewModel
     {
         public IEnumerable<Inspection> Inspections { get; set; }
         //Свойство для фильтрации
-        public FilterInspectionViewModel FilterOperationViewModel { get; set; }
+        public FilterInspectionViewModel FilterInspectionViewModel { get; set; }
+
         //Свойство для навигации по страницам
         public PageViewModel PageViewModel { get; set; }
         // Порядок сортировки

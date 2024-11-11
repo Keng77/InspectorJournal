@@ -2,7 +2,6 @@
 using InspectorJournal.DataLayer.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using InspectorJourna.ViewModels;
 
 namespace InspectorJournal.ViewModels
 {
